@@ -3,21 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Login - Database Alya Bot</title>
-  <link rel="icon" type="image/png" href="doo/favicon.png">
-  <link rel="stylesheet" href="style.css">
-   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-   
+    <title>login - Database Alya Bot</title>
+    <link rel="icon" type="image/png" href="doo/favicon.png">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
-    <!-- Tombol Switch Mode -->
     <button class="theme-toggle" onclick="toggleTheme()" id="themeBtn">
         <i class="fas fa-moon"></i>
     </button>
-
     <div class="container">
         <div class="card">
-            <!-- Header -->
             <div class="header-image">
                 <div class="robot-avatar">
                     <img src="doo/logo.png" alt="Database Alya Bot Logo">
@@ -26,31 +22,39 @@
                 <span class="badge">By @skydoo_id</span>
                 <div class="online-status">ONLINE</div>
             </div>
-
-            <div class="form-section">
+            <div class="dashboard-section">
                 <h3>Database Alya Bot</h3>
+                <p class="subtitle">Add and check your registered numbers</p>
                 <div class="input-group">
-                    <i class="fas fa-lock"></i>
-                    <input type="password" id="passwordInput" placeholder="Enter your password">
-                    <i class="fas fa-eye toggle-password" onclick="togglePassword()"></i>
+                    <input type="text" id="phoneInput" placeholder="Enter phone number">
                 </div>
-                <button class="btn-primary" onclick="handleLogin()">
-                    <i class="fas fa-lock"></i> Login
+                <button class="btn-primary" onclick="addNumber()">
+                    <i class="fas fa-plus"></i> Add Number
                 </button>
-
-                <p class="register-text">Belum Punya key?</p>
-                
-                <a href="https://wa.me/6282172992548" class="whatsapp-link" target="_blank">
-                    <i class="fab fa-whatsapp"></i> Beli sekarang!
-                </a>
-
-                <div class="footer-links">
+                <div class="search-group">
+                    <i class="fas fa-search"></i>
+                    <input type="text" id="searchInput" placeholder="Search numbers..." onkeyup="searchTable()">
+                </div>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Number</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody id="dataTableBody"></tbody>
+                    </table>
+                </div>
+                <div class="footer-dashboard">
                     <a href="https://whatsapp.com/channel/0029Vb7KToAFsn0iBm35UR0T" target="_blank">
-                        <i class="fas fa-bullhorn"></i> Saluran Owner
+                        <i class="fab fa-whatsapp"></i> Saluran
                     </a>
-                    <br>
-                    <a href="https://t.me/skydoo_id" target="_blank" style="color: #0088cc; margin-top: 8px; display: inline-block;">
-                        <i class="fab fa-telegram-plane"></i> Telegram Owner
+                    <a href="https://t.me/skydoo_id" target="_blank">
+                        <i class="fab fa-telegram-plane"></i> Telegram
+                    </a>
+                    <a href="https://wa.me/6282172992548" target="_blank">
+                        <i class="fas fa-headset"></i> Owner
                     </a>
                 </div>
             </div>
