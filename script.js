@@ -71,5 +71,5 @@ async function addNumber() {
         const d=await apiPost({action:'add',number});
         if (d.status) { alert('✅ '+d.message); input.value=''; await loadNumbers(); }
         else alert('❌ '+(d.message || 'Gagal menambah nomor'));
-    } catch { alert('Gagal terhubung ke server. Pastikan GITLAB_TOKEN sudah diatur di Vercel.'); }
+    } catch { alert('Gagal terhubung ke server.'); }
 }
