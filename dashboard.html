@@ -1,165 +1,66 @@
 <!DOCTYPE html>
-<html lang="id" data-theme="dark">
+<html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="theme-color" content="#080d18">
-
-    <title>Dashboard | Database Alya-Botz © 2026 by YT @sky_doo</title>
-
-    <link rel="icon" type="image/png" href="/doo/favicon.png?v=2">
-    <link rel="shortcut icon" type="image/png" href="/doo/favicon.png?v=2">
-
-    <link rel="stylesheet" href="/style.css">
-
-    <link rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <title>Dashboard | Database Alya-Botz © 2026 by YT @sky_doo<</title>
+    <link rel="icon" type="image/png" href="/doo/favicon.png?v=3">
+    <link rel="shortcut icon" type="image/png" href="/doo/favicon.png?v=3">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
-
 <body>
-    <main class="dashboard-container">
-
-        <header class="dashboard-header">
-            <div class="brand">
-                <img src="/doo/logo.png" alt="Alya-Botz" class="brand-logo">
-                <div>
-                    <h1>Dtbs Alya-Botz</h1>
-                    <p>Panel pengelolaan database nomor</p>
+    <button class="theme-toggle" onclick="toggleTheme()" id="themeBtn">
+        <i class="fas fa-moon"></i>
+    </button>
+    <div class="container">
+        <div class="card">
+            <div class="header-image">
+                <div class="robot-avatar">
+                    <img src="doo/logo.png" alt="Database Alya Bot Logo">
                 </div>
+                <h2>Dtbs Alya Bot</h2>
+                <span class="badge">By @skydoo_id</span>
+                <div class="online-status">ONLINE</div>
             </div>
-
-            <button type="button" id="themeBtn"
-                    class="theme-btn" onclick="toggleTheme()"
-                    aria-label="Ganti tema">
-                <i class="fas fa-moon"></i>
-            </button>
-        </header>
-
-        <section class="dashboard-card">
-            <div class="section-heading">
-                <div>
-                    <h2><i class="fas fa-database"></i> Database </h2>
-                    <p>Database load.</p>
+            <div class="dashboard-section">
+                <h3>Dtbs Alya Bot</h3>
+                <p class="subtitle">Add and check your registered numbers</p>
+                <div class="input-group">
+                    <input type="text" id="phoneInput" placeholder="Enter phone number">
                 </div>
-
-                <button type="button" class="refresh-btn"
-                        onclick="loadNumbers()">
-                    <i class="fas fa-rotate"></i> Refresh
+                <button class="btn-primary" onclick="addNumber()">
+                    <i class="fas fa-plus"></i> Add Number
                 </button>
-            </div>
-
-            <div class="stats-row">
-                <div class="stat-box">
-                    <span>Total Nomor</span>
-                    <strong id="totalNumbers">0</strong>
-                </div>
-
-                <div class="stat-box">
-                    <span>Status Active</span>
-                    <strong id="activeNumbers">0</strong>
-                </div>
-            </div>
-
-            <form id="addNumberForm" class="add-number-form">
-                <label for="phoneInput">Tambah Nomor</label>
-
-                <div class="input-row">
-                    <input
-                        type="tel"
-                        id="phoneInput"
-                        placeholder="Contoh: 6281234567890"
-                        autocomplete="off"
-                        required
-                    >
-
-                    <button type="submit" id="addNumberBtn">
-                        <i class="fas fa-plus"></i> Tambah
-                    </button>
-                </div>
-            </form>
-
-            <div class="table-toolbar">
-                <label for="searchInput">Daftar Nomor</label>
-
-                <div class="search-box">
+                <div class="search-group">
                     <i class="fas fa-search"></i>
-                    <input
-                        type="search"
-                        id="searchInput"
-                        placeholder="Cari nomor..."
-                        autocomplete="off"
-                    >
+                    <input type="text" id="searchInput" placeholder="Search numbers..." onkeyup="searchTable()">
+                </div>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Number</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody id="dataTableBody"></tbody>
+                    </table>
+                </div>
+                <div class="footer-dashboard">
+                    <a href="https://whatsapp.com/channel/0029Vb7KToAFsn0iBm35UR0T" target="_blank">
+                        <i class="fab fa-whatsapp"></i> Saluran
+                    </a>
+                    <a href="https://t.me/skydoo_id" target="_blank">
+                        <i class="fab fa-telegram-plane"></i> Telegram
+                    </a>
+                    <a href="https://wa.me/6282172992548" target="_blank">
+                        <i class="fas fa-headset"></i> Owner
+                    </a>
                 </div>
             </div>
-
-            <div class="table-wrapper">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Nomor Telepon</th>
-                            <th>Status</th>
-                        </tr>
-                    </thead>
-
-                    <tbody id="dataTableBody">
-                        <tr>
-                            <td colspan="2" class="loading-cell">
-                                Memuat database...
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-
-            <p id="databaseMessage" class="database-message"
-               role="status" aria-live="polite"></p>
-        </section>
-
-        <footer class="dashboard-footer">
-            <p>Database Alya-Botz &copy; 2026</p>
-        </footer>
-
-    </main>
-
-    <script src="/script.js"></script>
-
-    <script>
-        // Form menggunakan fungsi addNumber() dari script.js.
-        document.getElementById("addNumberForm")
-            .addEventListener("submit", function (event) {
-                event.preventDefault();
-                addNumber();
-            });
-
-        // Pencarian tabel.
-        document.getElementById("searchInput")
-            .addEventListener("input", searchTable);
-
-        // Tampilkan jumlah nomor setelah tabel diperbarui.
-        const originalRenderTable = renderTable;
-
-        renderTable = function (data) {
-            originalRenderTable(data);
-
-            const total = document.getElementById("totalNumbers");
-            const active = document.getElementById("activeNumbers");
-
-            if (total) {
-                total.textContent = numbersData.length;
-            }
-
-            if (active) {
-                active.textContent = numbersData.filter(
-                    item => item.status.toLowerCase() === "active"
-                ).length;
-            }
-        };
-
-        // Pastikan data ditampilkan saat dashboard dibuka.
-        if (sessionStorage.getItem("alyabotSession")) {
-            loadNumbers();
-        }
-    </script>
+        </div>
+    </div>
+    <script src="script.js"></script>
 </body>
 </html>
-
